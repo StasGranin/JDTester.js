@@ -126,11 +126,11 @@
 				this._testType(type, canBeNull, path, data);
 			}
 
-			if (!canBeNull)
+			if (canBeNull === false)
 			{
 				if (typeof canBeNull === BOOLEAN)
 				{
-					data === null && this._pushError('Null validation failed', path, data, type || 'not null');
+					data === null && this._pushError('Value cannot be null', path, data, type || 'not null');
 				}
 				else
 				{
@@ -142,7 +142,7 @@
 			{
 				if (typeof fn === FUNCTION)
 				{
-					!fn(data) && this._pushError('Value validation failed', path, data, fn);
+					fn(data) === false && this._pushError('fn() validation failed', path, data, fn); // Yep, that first "fn(data) === false" could be shortened to "!fn(data)". But you know, It's more readable like that 
 				}
 				else
 				{
@@ -163,12 +163,12 @@
 	JDTester.prototype._testType = function(type, canBeNull, path, data)
 	{
 		var dataType = realTypeOf(data);
-		var typeOfType = realTypeOf(type);
+		var typeOfType = realTypeOf(type); // Yep, it is a silly name for a valiable. You know that, I know that, let us continue
 		var isValid = false;
 
 		if (typeOfType === STRING || typeOfType === ARRAY)
 		{
-			if (canBeNull === true && dataType === NULL)
+			if (canBeNull === true && dataType === NULL) // If it's null and we defined it can be as such, there's no reason to fail the test
 			{
 				isValid = true;
 			}
@@ -178,7 +178,7 @@
 				{
 					isValid = true;
 				}
-				else if (typeOfType === ARRAY)
+				else if (typeOfType === ARRAY) // Maybe we want to allow it to be, let's say, an array AND a boolean (for some reason, I don't judge)
 				{
 					for (var i = 0, l = type.length; i < l; i++)
 					{
@@ -191,7 +191,7 @@
 				}
 			}
 
-			!isValid && this._pushError('Type validation failed', path, data, type);
+			isValid === false && this._pushError('Type validation failed', path, data, type);
 		}
 		else
 		{
@@ -242,7 +242,7 @@
 			{
 				if (data < min)
 				{
-					this._pushError('Min validation failed', path, data, min);
+					this._pushError('Min value validation failed', path, data, min);
 				}
 			}
 			else
@@ -257,7 +257,7 @@
 			{
 				if (data > max)
 				{
-					this._pushError('Max validation failed', path, data, max);
+					this._pushError('Max value validation failed', path, data, max);
 				}
 			}
 			else
@@ -302,7 +302,7 @@
 			}
 			else
 			{
-				throw 'DataTester schema error: Regex expected for "pattern" value. Got ' + typeof pattern;
+				throw 'DataTester schema error: RegExp object expected for "pattern" value. Got ' + typeof pattern;
 			}
 		}
 
