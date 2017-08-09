@@ -330,7 +330,7 @@
 	{
 		var minLength = getTestValue(schema.minLength, data);
 		var maxLength = getTestValue(schema.maxLength, data);
-		var allowDuplicates = getTestValue(schema.allowDuplicates, data, true);
+		var allowDuplicates = getTestValue(schema.allowDuplicates, data, true); // Probably should mention this is an expensive operation
 		var elementsSchema = getTestValue(schema.elements, data);
 		var allowDuplicatesType;
 		var duplicates;
@@ -433,7 +433,7 @@
 	 */
 	JDTester.prototype._testObject = function(data, schema, path)
 	{
-		var strictKeys = getTestValue(schema.strictKeys, data);
+		var strictKeys = getTestValue(schema.strictKeys, data); // Also expensive
 		var dataSchema = getTestValue(schema.data, data);
 
 		if (strictKeys !== undefined)
