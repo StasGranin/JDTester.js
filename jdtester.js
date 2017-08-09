@@ -234,7 +234,7 @@
 	{
 		var min = getTestValue(schema.min, data);
 		var max = getTestValue(schema.max, data);
-		var value = getTestValue(schema.value, data);
+		var value = getTestValue(schema.value, data);  // Hmmm... Probably should make this accept an array of values
 
 		if (min !== undefined)
 		{
