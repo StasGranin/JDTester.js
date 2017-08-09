@@ -503,21 +503,6 @@
 	};
 
 	/**
-	 * An object containing constants of data types
-	 * @public
-	 */
-	JDTester.types =
-	{
-		UNDEFINED: UNDEFINED,
-		NULL: NULL,
-		BOOLEAN: BOOLEAN,
-		NUMBER: NUMBER,
-		STRING: STRING,
-		ARRAY: ARRAY,
-		OBJECT: OBJECT
-	};
-
-	/**
 	 * @public
 	 */
 	JDTester.diff = recursiveDiff;
